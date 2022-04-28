@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "125541005220",
+    "project_id": "tccsenai",
+    "storage_bucket": "tccsenai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125541005220:android:5137523bb23828fa33b331",
+        "android_client_info": {
+          "package_name": "com.example.teste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125541005220-cnd1n597g6883qc2fbgnifn50hgucvd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4k6NdVk9--txNc7fjCmrXDKZ1aNlfWJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125541005220-cnd1n597g6883qc2fbgnifn50hgucvd7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
