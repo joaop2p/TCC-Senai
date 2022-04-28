@@ -36,29 +36,6 @@ class SplashScreen extends StatelessWidget {
                   const SizedBox(
                     height: 60,
                   ),
-                  //  Botao(
-                  //      label: 'ACESSAR',
-                  //      width: context.widthTransformer(reducedBy: 40),
-                  //      height: 35,
-                  //      onPressed: () {
-                  //         navigator?.pushNamed('/home');
-                  //       }),
-
-                  // ElevatedButton(
-                  //   onPressed: botaoAction2,
-                  //   style: ElevatedButton.styleFrom(
-                  //     shape: const StadiumBorder(),
-                  //     primary: Color.fromARGB(255, 24, 146, 13),
-                  //   ),
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(7),
-                  //     child: Text(
-                  //       'Acessar',
-                  //       style: TextStyle(
-                  //           fontSize: 24, fontWeight: FontWeight.bold),
-                  //     ),
-                  //   ),
-                  // ),
                   ElevatedButton(
                       child: Text("ACESSAR"),
                       style: ElevatedButton.styleFrom(

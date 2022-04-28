@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tcc/src/pages/acesso.dart';
 import 'package:tcc/src/pages/Menu.dart';
+import 'package:tcc/src/pages/login_page.dart';
 import 'package:tcc/src/services/auth_services.dart';
 
 class CheckAuth extends StatefulWidget {
@@ -19,7 +20,7 @@ class _CheckAuthState extends State<CheckAuth> {
     if (auth.isLoading)
       return loading();
     else if (auth.usuario == null)
-      return SplashScreen();
+      return LoginPage();
     else
       return Menu();
   }

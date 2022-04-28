@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tcc/src/pages/Login.dart';
 import 'package:tcc/src/pages/Menu.dart';
+import 'package:tcc/src/pages/Pedidos.dart';
 import 'package:tcc/src/services/auth_services.dart';
 
+import '../pages/acesso.dart';
 import '../pages/login_page.dart';
 
 class AuthCheck extends StatefulWidget {
@@ -20,7 +23,7 @@ class _AuthCheckState extends State<AuthCheck> {
     if (auth.isLoading)
       return loading();
     else if (auth.usuario == null)
-      return LoginPage();
+      return SplashScreen();
     else
       return Menu();
   }

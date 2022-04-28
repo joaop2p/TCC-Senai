@@ -7,6 +7,8 @@ void main() => runApp(Login());
 
 class Login extends StatelessWidget {
   final TextEditingController _controladorSenha = TextEditingController();
+  final TextEditingController _controladorTeste = TextEditingController();
+  final String _gg = '2';
 
   // This widget is the root of your application.
   @override

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
+import '../services/auth_services.dart';
 import 'Menu.dart';
 
 class QRCodePage extends StatefulWidget {
@@ -12,6 +14,12 @@ class QRCodePage extends StatefulWidget {
 }
 
 class _QRCodePageState extends State<QRCodePage> {
+  final formKey = GlobalKey<FormState>();
+  final email = TextEditingController();
+  final senha = TextEditingController();
+  final String _gg = '2';
+  bool loading = false;
+
   String ticket = '';
 
   readQRCode() async {
@@ -27,7 +35,26 @@ class _QRCodePageState extends State<QRCodePage> {
     // ignore: avoid_print
     print('VALOR IGUAL A: $ticket');
     if (ticket == 'aHeu1Qj8Po') {
-      Navigator.pushNamed(context, '/Menu');
+      final String Senha = '123456';
+      final String Email = 'mesa1@gmail.com';
+
+      print("senha igual a " + Senha);
+      print("Email " + Email);
+      // if (Senha == '2') {
+      //   Navigator.pushNamed(context, '/teste');
+      //}
+      login() async {
+        setState(() => loading = true);
+        try {
+          await context.read<AuthService>().login(Email, Senha);
+        } on AuthException catch (e) {
+          setState(() => loading = false);
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(e.message)));
+        }
+      }
+
+      // Navigator.pushNamed(context, '/Menu');
     }
   }
 
