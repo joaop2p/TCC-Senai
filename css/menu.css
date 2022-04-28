@@ -1,0 +1,57 @@
+body{
+  text-align: center;   
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+
+}
+nav.menu{
+  width: 1200px;
+  position: absolute;
+  left: 85%;
+  transform: translate(-95%);
+}
+ nav.menu{
+  display: inline-block;
+} 
+  
+* {box-sizing: border-box;
+}
+/* Set height of body and the document to 100% */
+body, html {
+height: 0%;
+margin: 0px;
+font-family: Arial;
+}
+
+/* Style tab links */
+.tablink {
+text-align: center;
+background-color: #555;
+color: white;
+float: left;
+border: none;
+outline: none;
+cursor:  pointer;
+padding: 15px 15px;
+font-size: 17px;
+width: 15%;
+}
+
+.tablink:hover {
+background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+color: white;
+display: none;
+padding: 100px 20px;
+height: 100%;
+}
+
+#Cardapio {background-color: #1abc9c;}
+#Pedidos {background-color:  #e74c3c;}
+#Mesas {background-color: #3498db;}
+#Funcionarios {background-color: #9b59b6;}
+#Configurações {background-color: #e67e22;}
+
