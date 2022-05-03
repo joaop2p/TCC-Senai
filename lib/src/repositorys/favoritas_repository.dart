@@ -1,69 +1,69 @@
-// import 'dart:collection';
+import 'dart:collection';
 
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
-// import '../banco/db_firestore.dart';
-// import '../services/auth_services.dart';
+import '../banco/db_firestore.dart';
+import '../models/mesa.dart';
+import '../services/auth_services.dart';
+import 'mesas_repo.dart';
 
-// class FavoritasRepository extends ChangeNotifier {
-//   List<Moeda> _lista = [];
-//   late FirebaseFirestore db;
-//   late AuthService auth;
+class FavoritasRepository extends ChangeNotifier {
+  final List<Mesa> _lista = [];
+  late FirebaseFirestore db;
+  late AuthService auth;
 
-//   FavoritasRepository({required this.auth}) {
-//     _startRepository();
-//   }
+  FavoritasRepository({required this.auth}) {
+    _startRepository();
+  }
 
-//   _startRepository() async {
-//     await _startFirestore();
-//     await _readFavoritas();
-//   }
+  _startRepository() async {
+    await _startFirestore();
+    await _readFavoritas();
+  }
 
-//   _startFirestore() {
-//     db = DBFirestore.get();
-//   }
+  _startFirestore() {
+    db = DBFirestore.get();
+  }
 
-//   _readFavoritas() async {
-//     if (auth.usuario != null && _lista.isEmpty) {
-//       final snapshot =
-//           await db.collection('usuarios/${auth.usuario!.uid}/favoritas').get();
+  _readFavoritas() async {
+    if (auth.usuario != null && _lista.isEmpty) {
+      final snapshot =
+          await db.collection('usuarios/${auth.usuario!.uid}/favoritas').get();
 
-//       snapshot.docs.forEach((doc) {
-//         Moeda moeda = MoedaRepository.tabela
-//             .firstWhere((moeda) => moeda.sigla == doc.get('sigla'));
-//         _lista.add(moeda);
-//         notifyListeners();
-//       });
-//     }
-//   }
+      snapshot.docs.forEach((doc) {
+        Mesa mesa = MesaRepository.tabela
+            .firstWhere((mesa) => mesa.nome == doc.get('nome'));
+        _lista.add(mesa);
+        notifyListeners();
+      });
+    }
+  }
 
-//   UnmodifiableListView<Moeda> get lista => UnmodifiableListView(_lista);
+  UnmodifiableListView<Mesa> get lista => UnmodifiableListView(_lista);
 
-//   saveAll(List<Moeda> moedas) {
-//     moedas.forEach((moeda) async {
-//       if (!_lista.any((atual) => atual.sigla == moeda.sigla)) {
-//         _lista.add(moeda);
-//         await db
-//             .collection('usuarios/${auth.usuario!.uid}/favoritas')
-//             .doc(moeda.sigla)
-//             .set({
-//           'moeda': moeda.nome,
-//           'sigla': moeda.sigla,
-//           'preco': moeda.preco,
-//         });
-//       }
-//     });
-//     notifyListeners();
-//   }
+  saveAll(List<Mesa> mesa) {
+    mesa.forEach((mesa) async {
+      if (!_lista.any((atual) => atual.nome == mesa.nome)) {
+        _lista.add(mesa);
+        await db
+            .collection('usuarios/${auth.usuario!.uid}/favoritas')
+            .doc(mesa.nome)
+            .set({
+          'moeda': mesa.nome,
+        });
+      }
+    });
+    notifyListeners();
+  }
 
-//   remove(Moeda moeda) async {
-//     await db
-//         .collection('usuarios/${auth.usuario!.uid}/favoritas')
-//         .doc(moeda.sigla)
-//         .delete();
-//     _lista.remove(moeda);
-//     notifyListeners();
-//   }
-// }
+  remove(Mesa mesa) async {
+    await db
+        .collection('usuarios/${auth.usuario!.uid}/favoritas')
+        .doc(mesa.nome)
+        .delete();
+    _lista.remove(mesa);
+    notifyListeners();
+  }
+}

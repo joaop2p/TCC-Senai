@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tcc/src/pages/Login.dart';
-import 'package:tcc/src/pages/Menu.dart';
+
+import 'package:tcc/src/pages/home.dart';
 import 'package:tcc/src/pages/Pedidos.dart';
 import 'package:tcc/src/services/auth_services.dart';
 
@@ -22,10 +22,11 @@ class _AuthCheckState extends State<AuthCheck> {
 
     if (auth.isLoading)
       return loading();
-    else if (auth.usuario == null)
+    else if (auth.usuario == null) {
       return SplashScreen();
-    else
-      return Menu();
+    } else {
+      return Home();
+    }
   }
 
   loading() {

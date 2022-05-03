@@ -1,3 +1,5 @@
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:get/get.dart';
 import "package:tcc/src/services/auth_services.dart";
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,11 +21,31 @@ class _LoginPageState extends State<LoginPage> {
   late String actionButton;
   late String toggleButton;
   bool loading = false;
-
+  String ticket = '';
+  String Mensagem = 'Coloque um valor correto!';
   @override
   void initState() {
     super.initState();
     setFormAction(true);
+  }
+
+  readQRCode() async {
+    String code = await FlutterBarcodeScanner.scanBarcode(
+      "#FFFFFF",
+      "Cancelar",
+      false,
+      ScanMode.QR,
+    );
+    setState(
+      () => ticket = code != '-1' ? code : 'Não Validado',
+    );
+    if (ticket == 'aHeu1Qj8Po') {
+      senha.text = '123456';
+      email.text = 'mesa1@gmail.com';
+
+      print("senha igual a " + senha.text);
+      print("Email " + email.text);
+    }
   }
 
   setFormAction(bool acao) {
@@ -31,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
       isLogin = acao;
       if (isLogin) {
         titulo = 'Bem vindo';
-        actionButton = 'Login';
+        actionButton = 'Entrar';
         toggleButton = 'Ainda não tem conta? Cadastre-se agora.';
       } else {
         titulo = 'Crie sua conta';
@@ -67,75 +89,54 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(top: 100),
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  titulo,
-                  style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: -1.5,
-                  ),
-                ),
+        child: Stack(children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SizedBox(
+              width: context.width,
+              child: Image.network(
+                'https://firebasestorage.googleapis.com/v0/b/tccsenai.appspot.com/o/fundo2.png?alt=media&token=70356d20-7847-452f-9911-b771e8c6c0f6',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Padding(
+              padding: EdgeInsets.only(top: 100),
+              child: Column(children: [
                 Padding(
-                  padding: EdgeInsets.all(24),
-                  child: TextFormField(
-                    controller: email,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Email',
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Informe o email corretamente!';
-                      }
-                      return null;
-                    },
-                  ),
+                  padding: EdgeInsets.all(24.0),
+                  child: Image(
+                      image: NetworkImage(
+                          'https://firebasestorage.googleapis.com/v0/b/tccsenai.appspot.com/o/logo.png?alt=media&token=ad6c0b69-6b65-403d-9b00-a866756ba1da')),
                 ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-                  child: TextFormField(
-                    controller: senha,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Senha',
+                TextButton(
+                  onPressed: readQRCode,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 27, 138, 31),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Informa sua senha!';
-                      } else if (value.length < 6) {
-                        return 'Sua senha deve ter no mínimo 6 caracteres';
-                      }
-                      return null;
-                    },
+                    width: 100,
+                    height: 100,
+                    child: const Image(
+                      image: NetworkImage(
+                          'https://firebasestorage.googleapis.com/v0/b/tccsenai.appspot.com/o/qr.png?alt=media&token=1e40e376-5f0e-4e8a-9582-b262eadc1195'),
+                      width: 250,
+                      height: 200,
+                    ),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(24.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        if (isLogin) {
-                          login();
-                        } else {
-                          registrar();
-                        }
-                      }
+                      login();
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: (loading)
                           ? [
-                              Padding(
+                              const Padding(
                                 padding: EdgeInsets.all(16),
                                 child: SizedBox(
                                   width: 24,
@@ -159,14 +160,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                TextButton(
-                  onPressed: () => setFormAction(!isLogin),
-                  child: Text(toggleButton),
-                ),
-              ],
-            ),
-          ),
-        ),
+              ])),
+        ]),
       ),
     );
   }

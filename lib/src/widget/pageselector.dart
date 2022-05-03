@@ -4,9 +4,15 @@ class PageSelectorExample extends StatelessWidget {
   const PageSelectorExample({Key? key}) : super(key: key);
 
   static const Kimages = <Image>[
-    Image(image: AssetImage('assets/prato.png')),
-    Image(image: AssetImage('assets/prato.png')),
-    Image(image: AssetImage('assets/prato.png')),
+    Image(
+        image: NetworkImage(
+            'https://firebasestorage.googleapis.com/v0/b/tccsenai.appspot.com/o/prato.png?alt=media&token=4f41e3aa-e9f0-4495-a4db-b49c5e43ee91')),
+    Image(
+        image: NetworkImage(
+            'https://firebasestorage.googleapis.com/v0/b/tccsenai.appspot.com/o/prato.png?alt=media&token=4f41e3aa-e9f0-4495-a4db-b49c5e43ee91')),
+    Image(
+        image: NetworkImage(
+            'https://firebasestorage.googleapis.com/v0/b/tccsenai.appspot.com/o/prato.png?alt=media&token=4f41e3aa-e9f0-4495-a4db-b49c5e43ee91')),
 
     // Icon(Icons.home),
     // Icon(Icons.android),

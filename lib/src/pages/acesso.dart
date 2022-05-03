@@ -9,7 +9,6 @@ class SplashScreen extends StatelessWidget {
     botaoAction2() {
       Navigator.pushNamed(context, '/login');
     }
-
     return Scaffold(
       body: Container(
         color: const Color(0XFF140E0E),
